@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
@@ -12,10 +12,6 @@ export default function Home() {
     product: '',
     amount: '',
   });
-
-  const totalAmount = useMemo(() => {
-    return sales.reduce((acc, sale) => acc + Number(sale.amount || 0), 0);
-  }, [sales]);
 
   const fetchSales = async () => {
     try {
@@ -126,10 +122,7 @@ export default function Home() {
       </section>
 
       <section className="card">
-        <div className="header-row">
-          <h2>Ventas</h2>
-          <span className="badge">Total: ${totalAmount.toFixed(2)}</span>
-        </div>
+        <h2>Ventas</h2>
 
         {loading ? <p>Cargando...</p> : null}
         {!loading && sales.length === 0 ? <p>No hay ventas registradas.</p> : null}
@@ -139,7 +132,6 @@ export default function Home() {
             <table>
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>Cliente</th>
                   <th>Producto</th>
                   <th>Monto</th>
@@ -149,7 +141,6 @@ export default function Home() {
               <tbody>
                 {sales.map((sale) => (
                   <tr key={sale.id}>
-                    <td>{sale.id}</td>
                     <td>{sale.customer}</td>
                     <td>{sale.product}</td>
                     <td>${Number(sale.amount).toFixed(2)}</td>
@@ -165,6 +156,7 @@ export default function Home() {
                         <option value="4">4</option>
                         <option value="5">5</option>
                       </select>
+                      {sale.score == null ? ' (sin score)' : ''}
                     </td>
                   </tr>
                 ))}

@@ -87,21 +87,6 @@ td {
   font-size: 0.94rem;
 }
 
-.header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-}
-
-.badge {
-  padding: 6px 10px;
-  border-radius: 999px;
-  background: #e4f2fd;
-  color: #094067;
-  font-weight: 600;
-}
-
 .error {
   margin-top: 12px;
   color: var(--danger);
